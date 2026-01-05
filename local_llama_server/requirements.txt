@@ -1,0 +1,9 @@
+fastmcp>=0.1.0
+python-dotenv>=1.0.0
+numpy>=1.21.0
+asyncio>=3.4.3
+# Optional dependencies for production use:
+# llama-cpp-python>=0.2.0  # For actual LLaMA model inference
+# torch>=2.0.0             # For PyTorch-based models
+# transformers>=4.30.0     # For Hugging Face models
+# sentence-transformers>=2.2.0  # For embedding models

@@ -1,0 +1,58 @@
+{
+  "servers": {
+    "openai": {
+      "name": "OpenAI Server",
+      "description": "Provides OpenAI GPT chat and embedding tools",
+      "command": "python",
+      "args": ["openai_server/server.py"],
+      "cwd": ".",
+      "port": 8001,
+      "health_endpoint": "/health",
+      "tools": ["openai_chat", "openai_embed", "list_models"],
+      "resources": ["models"],
+      "required_env": ["OPENAI_API_KEY"]
+    },
+    "groq": {
+      "name": "Groq Server", 
+      "description": "Provides Groq-accelerated inference",
+      "command": "python",
+      "args": ["groq_server/server.py"],
+      "cwd": ".",
+      "port": 8002,
+      "health_endpoint": "/health",
+      "tools": ["groq_chat", "groq_embed"],
+      "resources": ["models"],
+      "required_env": ["GROQ_API_KEY"]
+    },
+    "local_llama": {
+      "name": "Local LLaMA Server",
+      "description": "Provides local quantized LLaMA inference",
+      "command": "python", 
+      "args": ["local_llama_server/server.py"],
+      "cwd": ".",
+      "port": 8003,
+      "health_endpoint": "/health",
+      "tools": ["local_inference", "local_embed"],
+      "resources": ["models"],
+      "required_env": ["MODEL_PATH"]
+    },
+    "utility": {
+      "name": "Utility Server",
+      "description": "Provides non-AI utility tools",
+      "command": "python",
+      "args": ["utility_server/server.py"], 
+      "cwd": ".",
+      "port": 8004,
+      "health_endpoint": "/health",
+      "tools": ["web_search", "get_weather"],
+      "resources": [],
+      "required_env": ["WEATHER_API_KEY"]
+    }
+  },
+  "orchestrator": {
+    "port": 8000,
+    "default_timeout": 30,
+    "retry_attempts": 3,
+    "load_balancing": "round_robin"
+  }
+}
